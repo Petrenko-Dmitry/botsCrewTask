@@ -3,10 +3,10 @@ Set Up MySQL To set up the MySQL database, navigate to the project's root direct
 Once the application is running, you can enter commands into the console to interact with the university data.
 
 Technologies Used
-  Java 22
-  Spring Boot
-  Spring Data JPA
-  MySQL
+Java 22
+Spring Boot
+Spring Data JPA
+MySQL
 
 Task:
 Create a simple Spring Boot Java project with the console interface for the university, which consists of departments and lectors. The lectors could work in more than one department. A lector could have one degree (assistant, associate professor, professor).

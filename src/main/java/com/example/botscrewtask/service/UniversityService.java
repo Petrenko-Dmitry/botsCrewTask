@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Scanner;
 
 import static com.example.botscrewtask.constants.StringConstants.*;
+import static org.apache.logging.log4j.util.Strings.EMPTY;
 
 @Service
 public class UniversityService {
@@ -17,9 +18,9 @@ public class UniversityService {
 
     @PostConstruct
     public void processCommand() {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            while (true) {
+        var scanner = new Scanner(System.in);
+        while (true) {
+            try {
                 System.out.println(CHOOSE_COMMAND_MESSAGE);
                 System.out.println(String.format(TWO_PARAMS_FORMAT, 1, FIRST_COMMAND));
                 System.out.println(String.format(TWO_PARAMS_FORMAT, 2, SECOND_COMMAND));
@@ -27,10 +28,17 @@ public class UniversityService {
                 System.out.println(String.format(TWO_PARAMS_FORMAT, 4, FOURTH_COMMAND));
                 System.out.println(String.format(TWO_PARAMS_FORMAT, 5, FIFTH_COMMAND));
 
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice;
+                try {
+                    choice = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException ex) {
+                    System.out.println(UNKNOWN_COMMAND_TYPE_NUMBER_MESSAGE);
+                    continue;
+                }
 
-                var departmentName = "";
-                var searchTemplate = "";
+
+                var departmentName = EMPTY;
+                var searchTemplate = EMPTY;
 
                 if (choice != 5) {
                     var departments = this.departmentService.findAllDepartmentsName();
@@ -59,16 +67,16 @@ public class UniversityService {
                         System.out.println(this.departmentService.getEmployeeCount(departmentName));
                         break;
                     case 5:
-                        var result = this.lectorService.globalSearch(searchTemplate);
+                        var result = this.lectorService.globalSearch(searchTemplate.trim());
                         System.out.println(String.join(", ", result));
                         break;
                     default:
                         System.out.println(UNKNOWN_COMMAND_MESSAGE);
                         break;
                 }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
     }
 }

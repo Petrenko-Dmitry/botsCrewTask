@@ -11,6 +11,7 @@ public class StringConstants {
     public final static String CHOOSE_DEPARTMENT_MESSAGE = "Choose department:";
     public final static String TYPE_TEMPLATE_MESSAGE = "Type template:";
     public final static String UNKNOWN_COMMAND_MESSAGE = "Unknown command.";
+    public final static String UNKNOWN_COMMAND_TYPE_NUMBER_MESSAGE = UNKNOWN_COMMAND_MESSAGE + " Type natural number!";
 
     public final static String HEAD_OF_DEPARTMENT_FORMAT = "Head of %s department is %s";
     public final static String DEPARTMENT_STATISTIC_FORMAT = "assistants - %s,\nassociate professors - %s,\nprofessors - %s";
